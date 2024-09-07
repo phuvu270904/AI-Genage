@@ -39,8 +39,31 @@ const CreatePost = () => {
         }
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
+        if (form.name && form.prompt && form.photo) {
+            try {
+                setLoading(true);
+                const res = await fetch('http://localhost:8080/api/v1/posts', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(form)
+                });
+                const data = await res.json();
+                if (data.success) {
+                    navigate('/');
+                }
+            } catch (error) {
+                console.log(error);
+            } finally {
+                setLoading(false);
+            }
+        } else {
+            alert('Please fill in all fields');
+        }
     }
 
     const handleChange = (e) => {
@@ -56,7 +79,7 @@ const CreatePost = () => {
         <section className='max-w-7xl mx-auto'>
             <div>
                 <h1 className='font-extrabold text-[#222328] text-[32px]'>Create</h1>
-                <p className='mt-2 text-[#666e75] text-[14px] max-w[500px]'>Create imaginative and visually stunning images through DALL-E AI and share them with the community</p>
+                <p className='mt-2 text-[#666e75] text-[20px] max-w[500px]'>Create imaginative and visually stunning images through AI and share them with the community</p>
             </div>
 
             <form className='mt-16 max-w-3xl' onSubmit={handleSubmit}>
