@@ -20,15 +20,20 @@ const CreatePost = () => {
         if (form.prompt) {
             try {
                 setGeneratingImg(true);
-                const res = await fetch('http://localhost:8080/api/v1/generate/limewire', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ prompt: form.prompt })
-                });
-                const data = await res.json();
-                setForm({ ...form, photo: data.photo });
+                const response = await fetch(
+                    "http://localhost:8080/api/v1/generate",
+                    {
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        method: "POST",
+                        body: JSON.stringify({inputs: form.prompt}),
+                    }
+                );
+                const result = await response.json();
+
+                setForm({ ...form, photo: result.photo });
+                
             } catch (error) {
                 console.log(error);
             } finally {
@@ -77,9 +82,9 @@ const CreatePost = () => {
 
     return (
         <section className='max-w-7xl mx-auto'>
-            <div>
-                <h1 className='font-extrabold text-[#222328] text-[32px]'>Create</h1>
-                <p className='mt-2 text-[#666e75] text-[20px] max-w[500px]'>Create imaginative and visually stunning images through AI and share them with the community</p>
+            <div className='flex flex-col items-center'>
+                <h1 className='font-extrabold text-[#222328] text-[50px]'>Create a Post</h1>
+                <p className='mt-2 text-[#666e75] text-[25px] max-w[500px]'>Create imaginative and visually stunning images through AI and share them with the community</p>
             </div>
 
             <form className='mt-16 max-w-3xl' onSubmit={handleSubmit}>
@@ -88,7 +93,7 @@ const CreatePost = () => {
                         labelName="Your name"
                         type="text"
                         name="name"
-                        placeholder="John Doe"
+                        placeholder="Phu Vu"
                         value={form.name}
                         handleChange={handleChange}
                     />
