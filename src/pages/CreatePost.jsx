@@ -20,7 +20,7 @@ const CreatePost = () => {
         if (form.prompt) {
             try {
                 setGeneratingImg(true);
-                const res = await fetch('http://localhost:8080/api/v1/dalle', {
+                const res = await fetch('http://localhost:8080/api/v1/generate/limewire', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -28,9 +28,9 @@ const CreatePost = () => {
                     body: JSON.stringify({ prompt: form.prompt })
                 });
                 const data = await res.json();
-                setForm({ ...form, photo: `data:image/jpeg;base64,${data.photo}` });
+                setForm({ ...form, photo: data.photo });
             } catch (error) {
-                alert(error);
+                console.log(error);
             } finally {
                 setGeneratingImg(false);
             }
