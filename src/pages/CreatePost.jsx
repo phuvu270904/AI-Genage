@@ -7,6 +7,7 @@ import { FormField, Loader } from '../components';
 
 
 const CreatePost = () => {
+    const apiUrl = import.meta.env.VITE_APP_API_URL;
     const navigate = useNavigate();
     const [form, setForm] = useState({
         name: '',
@@ -21,7 +22,7 @@ const CreatePost = () => {
             try {
                 setGeneratingImg(true);
                 const response = await fetch(
-                    "http://localhost:8080/api/v1/generate",
+                    `${apiUrl}/api/v1/generate`,
                     {
                         headers: {
                             "Content-Type": "application/json",
@@ -50,7 +51,7 @@ const CreatePost = () => {
         if (form.name && form.prompt && form.photo) {
             try {
                 setLoading(true);
-                const res = await fetch('http://localhost:8080/api/v1/posts', {
+                const res = await fetch(`${apiUrl}/api/v1/posts`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

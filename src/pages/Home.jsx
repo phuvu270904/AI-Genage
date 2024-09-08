@@ -13,6 +13,7 @@ const RenderCards = ({data, title}) => {
 }
 
 const Home = () => {
+    const apiUrl = import.meta.env.VITE_APP_API_URL;
     const [loading, setLoading] = useState(false);
     const [allPosts, setAllPosts] = useState(null);
     const [searchText, setSearchText] = useState('');
@@ -23,7 +24,7 @@ const Home = () => {
         const fetchPosts = async () => {
             try {
                 setLoading(true);
-                const res = await fetch('http://localhost:8080/api/v1/posts', {
+                const res = await fetch(`${apiUrl}/api/v1/posts`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json'
