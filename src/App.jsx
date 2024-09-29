@@ -7,6 +7,8 @@ import { Login, Register } from './pages';
 
 
 const App = () => {
+  const isLoggedIn = localStorage.getItem('accessToken');
+
   return (
     <BrowserRouter>
       <header className='w-full flex justify-between items-center bg-white sm:px-8 px-4 py-4 border-b border-b-[#e6ebf4]'>
@@ -19,9 +21,11 @@ const App = () => {
             Create
           </Link>
 
-          <Link to="/login" className='ml-4'>
-            Login
-          </Link>
+          {!isLoggedIn && (
+            <Link to="/login" className='ml-4'>
+              Login
+            </Link>
+          )}
         </div>
         
       </header>
