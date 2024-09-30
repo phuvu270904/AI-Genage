@@ -33,6 +33,7 @@ const Login = () => {
         const data = await res.json()
         localStorage.setItem('accessToken', data.accessToken);
         navigate('/');
+        window.location.reload();
       } catch (error) {
         console.log(error);
       } finally {
