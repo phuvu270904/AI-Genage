@@ -89,7 +89,11 @@ const Login = () => {
 
           <div className="flex text-sm">
             <p>Don’t have an account yet? </p>
-            <a href="#" className="ml-1 font-semibold text-indigo-600 hover:text-indigo-500">
+            <a 
+              href="#" 
+              className="ml-1 font-semibold text-indigo-600 hover:text-indigo-500"
+              onClick={() => navigate('/register')}
+            >
               Sign up
             </a>
           </div>

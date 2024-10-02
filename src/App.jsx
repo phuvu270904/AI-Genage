@@ -1,17 +1,24 @@
 // eslint-disable-next-line no-unused-vars
-import React from 'react'
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { BrowserRouter, Link, Route, Routes, useNavigate } from 'react-router-dom'
 import { logo } from './assets'
 import { Home, CreatePost } from './pages';
 import { Login, Register } from './pages';
 
 
 const App = () => {
+  const apiUrl = import.meta.env.VITE_APP_API_URL;
   const isLoggedIn = localStorage.getItem('accessToken');
+  const nav = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem('accessToken');
+    nav('/');
     window.location.reload();
   };
+
+  useEffect(() => {
+    
+  }, [])
 
   return (
     <BrowserRouter>
