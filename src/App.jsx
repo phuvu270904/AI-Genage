@@ -15,6 +15,22 @@ const App = () => {
     nav('/');
     window.location.reload();
   };
+  useEffect(() => {
+    const verify = async () => { 
+      const res = await fetch(`${apiUrl}/api/v1/auth/verify`, {
+        method: 'POST',
+        headers: {
+          x_authorization: isLoggedIn
+        }
+      })
+
+      if (res.status === 400) {
+        localStorage.removeItem('accessToken');
+      }
+    }
+
+    verify();
+  }, [nav]);
 
 
   return (
