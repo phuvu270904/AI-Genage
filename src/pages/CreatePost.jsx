@@ -34,7 +34,7 @@ const CreatePost = () => {
                             "Content-Type": "application/json",
                         },
                         method: "POST",
-                        body: JSON.stringify({inputs: form.prompt}),
+                        body: JSON.stringify({prompt: form.prompt}),
                     }
                 );
                 const result = await response.json();
